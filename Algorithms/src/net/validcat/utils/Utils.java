@@ -1,16 +1,15 @@
 package net.validcat.utils;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-import java.util.TreeMap;
 
 public class Utils {
 
@@ -73,5 +72,44 @@ public class Utils {
 		}
 		return null;
 	}
+	
+	public static void printArr(List<int[]> input) {
+		for (int[] is : input) {
+			System.out.println(Arrays.toString(is));
+		}
+	}
+	
+	public static void writeListToFile(List<int[]> input) throws IOException {
+		File file = new File("D:\\android\\Git\\algorithmes\\Algorithms\\result.txt");
+		 
+		// if file doesnt exists, then create it
+		if (!file.exists()) {
+			file.createNewFile();
+		}
 
+		PrintWriter writer = new PrintWriter(new FileWriter(file, true));
+		
+ 		for (int[] is : input) {
+ 			writer.println(Arrays.toString(is));
+		}
+		
+ 		writer.close();
+	}
+
+	public static void writeToFile(String str) throws IOException {
+		File file = new File("D:\\android\\Git\\algorithmes\\Algorithms\\result.txt");
+		// if file doesnt exists, then create it
+		if (!file.exists()) {
+			file.createNewFile();
+		}
+		PrintWriter writer = new PrintWriter(new FileWriter(file, true));
+		writer.println(str);
+ 		writer.close();
+	}
+	
+	public static void createNewFile() throws IOException {
+		File file = new File("D:\\android\\Git\\algorithmes\\Algorithms\\result.txt");
+		file.delete();
+	}
+	
 }

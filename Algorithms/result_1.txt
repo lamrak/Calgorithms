@@ -1,0 +1,9 @@
+Contraction: 2 & 1
+New iteration
+[3, 4, 4]
+[4, 2, 2, 2]
+[2, 3]
+Contraction: 3 & 4
+New iteration
+[2, 3]
+[3, 2, 2, 2]
