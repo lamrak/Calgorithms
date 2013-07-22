@@ -39,18 +39,8 @@ public class KargerAlgorithm {
 		return in;
 	}
 
-	/**
-	 * Delete (replace) in list all unused vertex (vertexA instead of vertexB)
-	 */
 	private void replaceVertexInWholeList(List<int[]> input, int vertexB, int vertexA) {
-		for (int z = 0; z < input.size(); z++) {
-			int[] arr = input.get(z);
-			for (int i = 0; i < arr.length; i++) {
-				if (arr[i] == vertexB) {
-					arr[i] = vertexA;
-				}
-			}			
-		}
+		for (int[] arr : input)  for (int i = 0; i < arr.length; i++)  if (arr[i] == vertexB) arr[i] = vertexA;
 	}
 
 	private void contraction(List<int[]> input, int i, int vertexA, int vertexB) throws IOException {
@@ -66,26 +56,14 @@ public class KargerAlgorithm {
 		input.remove(rowB);
 		
 		//Add new int[] row
-		input.add(convertIntegers(fuseRows));
+		input.add(convertListToIntArr(fuseRows));
 	}
 
-	/**
-	 * Fuse Array and remove loops
-	 * 
-	 */
-	private void addArrayToListExcudeLoops(List<Integer> fuseRows, int[] row, int vertexA, int vertexB) {
-		for (int i = 1; i < row.length; i++) {
-			if (row[i] != vertexA && row[i] != vertexB) {
-				fuseRows.add(row[i]);
-			}
-		}
+	private void addArrayToListExcudeLoops(List<Integer> result, int[] row, int vertexA, int vertexB) {
+		for (int i = 1; i < row.length; i++)  if (row[i] != vertexA && row[i] != vertexB)  result.add(row[i]);
 	}
 	
-	/**
-	 * Convert <code>List<Integers></code> to <code>int[]</code>
-	 * @return Array <code>int[]</code>
-	 */
-	public static int[] convertIntegers(List<Integer> integers) {
+	public static int[] convertListToIntArr(List<Integer> integers) {
 	    int[] ret = new int[integers.size()];
 	    Iterator<Integer> iterator = integers.iterator();
 	    for (int i = 0; i < ret.length; i++) {
@@ -94,14 +72,8 @@ public class KargerAlgorithm {
 	    return ret;
 	}
 
-	/**
-	 * Find corresponding row from the list by vertex value.
-	 * @return Array int[] for vertexB 
-	 */
 	private int[] getRowByValue(List<int[]> input, int vertexB) {
-		for (int[] arr : input) {
-			if (arr[0] == vertexB) return arr; 
-		} 
+		for (int[] arr : input) if (arr[0] == vertexB) return arr; 
 		return null;
 	}
 
