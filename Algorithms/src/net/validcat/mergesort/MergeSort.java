@@ -76,6 +76,7 @@ public class MergeSort {
 //		return merge(i, j, z, output, left, right);
 	}
 	
+	@SuppressWarnings("unused")
 	private int[] addRest(int arrIndex, int outIndex, int[] output, int[] array) {
 		for (int k = arrIndex; k < array.length; k++) {
 			output[outIndex++] = array[k];

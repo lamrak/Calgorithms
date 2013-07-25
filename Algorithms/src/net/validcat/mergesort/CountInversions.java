@@ -72,23 +72,23 @@ public class CountInversions {
 //		return countAndMmerge(i, j, z, output, left, right);
 	}
 	
-	private int countSplit(int z, int i, int j, int[] left, int[] right){
-		if (left[i] > right[j]) {
-			z++;
-			i++;
-			if (left.length == i) return z; 
-		} else {
-			j++;
-			if (right.length == j) return z;
-		}
-		return countSplit(z, i, j, left, right);
-	}
-	
-	private int[] addRest(int arrIndex, int outIndex, int[] output, int[] array) {
-		for (int k = arrIndex; k < array.length; k++) {
-			output[outIndex++] = array[k];
-		}
-		return output;
-	}
+//	private int countSplit(int z, int i, int j, int[] left, int[] right){
+//		if (left[i] > right[j]) {
+//			z++;
+//			i++;
+//			if (left.length == i) return z; 
+//		} else {
+//			j++;
+//			if (right.length == j) return z;
+//		}
+//		return countSplit(z, i, j, left, right);
+//	}
+//	
+//	private int[] addRest(int arrIndex, int outIndex, int[] output, int[] array) {
+//		for (int k = arrIndex; k < array.length; k++) {
+//			output[outIndex++] = array[k];
+//		}
+//		return output;
+//	}
 
 }
