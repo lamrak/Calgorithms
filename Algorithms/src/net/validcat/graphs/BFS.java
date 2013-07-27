@@ -1,6 +1,5 @@
-package net.validcat.bfs;
+package net.validcat.graphs;
 
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -14,30 +13,9 @@ public class BFS {
 	
 	public static void main(String[] args) {
 		BFS bfsAlg = new BFS();
-		Graph graph = bfsAlg.buildGraph("");
+		Graph graph = Graph.build("");
 		
 		bfsAlg.bfs(graph, graph.getVertexes().get(0));
-	}
-	
-	public Graph buildGraph(String path) {
-		Graph graph = new Graph();
-		List<int[]> list = null;
-		try {
-			list = Utils.readDataFromFileAsList(path);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		for (int i = 0; i < list.size(); i++) {
-			int[] v = list.get(i);
-			Vertex vertex = new Vertex(String.valueOf(v[0]), v[0]);
-			for (int j : v) {
-				vertex.addEdge(new Vertex(String.valueOf(j), j));
-			}
-			graph.addVertexe(vertex);
-		}
-
-		return graph;
 	}
 	
 	public int countgraphConnectivity(Graph graph) {
@@ -64,7 +42,7 @@ public class BFS {
 			for (Vertex vertexB : edges) {
 				if (!vertexB.isExplored()) {
 					vertexB.setExplored(true);
-					vertexB.setDistance(vertex.getDistance()+1);
+					vertexB.setLabel(vertex.getLabel()+1);
 					queue.offer(vertexB);
 				}
 			}

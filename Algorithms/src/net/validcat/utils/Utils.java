@@ -11,6 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import net.validcat.models.Graph;
+import net.validcat.models.Vertex;
+
 public class Utils {
 
 	public static int[] readArrayFromFile(String path, int arrayLength)

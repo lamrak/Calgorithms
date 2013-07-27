@@ -1,17 +1,28 @@
 package net.validcat.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Vertex {
 	private String name;
 	private int index;
-	private List<Vertex> listVertexesB;
+	private List<Vertex> listVertexesB = new ArrayList<Vertex>();
 	private boolean explored = false;
-	private int distance = 0;
+	private int label = 0;
+	
+	private Vertex leader; //for SCCs 
 	
 	public Vertex(String name, int index) {
-		super();
 		this.name = name;
+		this.index = index;
+	}
+
+	public Vertex(int name, int index) {
+		this.name = String.valueOf(name);
+		this.index = index;
+	}
+
+	public void setIndex(int index) {
 		this.index = index;
 	}
 
@@ -47,17 +58,54 @@ public class Vertex {
 		listVertexesB.remove(vertexB);
 	}
 
-	public int getDistance() {
-		return distance;
+	public int getLabel() {
+		return label;
 	}
 
-	public void setDistance(int distance) {
-		this.distance = distance;
+	public void setLabel(int label) {
+		this.label = label;
+	}
+
+	public Vertex getLeader() {
+		return leader;
+	}
+
+	public void setLeader(Vertex leader) {
+		this.leader = leader;
+	}
+	
+	public void printVertex() {
+		System.out.println(toString() + ": " + index);
+		for (Vertex vertexB : listVertexesB) {
+			System.out.println("Connected: " + vertexB.getIndex());
+		}
 	}
 
 	@Override
 	public String toString() {
 		return "Vertex [name=" + name + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + index;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vertex other = (Vertex) obj;
+		if (index != other.index)
+			return false;
+		return true;
 	}
 	
 }
