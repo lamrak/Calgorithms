@@ -1,5 +1,7 @@
 package net.validcat.models;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,53 +35,62 @@ public class Graph {
 		vertexes.remove(vertex);
 	}
 
-//	public List<Edge> getEdges() {
-//		return edges;
-//	}
-//
-//	public void setEdges(List<Edge> edges) {
-//		this.edges = edges;
-//	}
-	
-//	public void addEdge(Edge edge) {
-//		edges.add(edge);
-//	}
-//	
-//	public void removeEdge(Edge edge) {
-//		edges.remove(edge);
-//	}
-	
 	public static Graph build(String path) {
+		System.out.println("Start building Graph");
 		Graph graph = new Graph();
-		List<int[]> list = null;
+		//Add vertexes
+		for (int i = 1; i <= 875714; i++) {
+			Vertex vertex = new Vertex(i);
+			graph.addVertex(vertex);
+		}
+		System.out.println("Vertexes were added");
 		try {
-			list = Utils.readDataFromFileAsList(path);
+			BufferedReader br = new BufferedReader(new FileReader(path));
+			String line;
+			while ((line = br.readLine()) != null) {
+				int[] row = Utils.convertStringArraytoIntArray(line.split("\\s+")); //Integer.parseInt(line);
+				graph.getVertexes().get(row[0]-1).addEdge(graph.getVertexes().get(row[1]-1));
+//				list.add(row);
+			}
+			br.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Graph was done");
+		((ArrayList<Vertex>)graph.getVertexes()).trimToSize();
+		return graph;
+	}
+	
+	public static Graph buildReverse(String path) {
+		System.out.println("Start building reverse Graph");
+		Graph graph = new Graph();
 		//Add vertexes
-		for (int i = 0; i < list.size(); i++) {
-			int[] v = list.get(i);
-			Vertex vertex = new Vertex(String.valueOf(v[0]), v[0]);
+		for (int i = 1; i <= 875714; i++) {
+			Vertex vertex = new Vertex(i);
 			graph.addVertex(vertex);
 		}
-		//Add edges (as a list of vartixBs in the vertixA)
-		for (int i = 0; i < list.size(); i++) {
-			int[] endpointArr = list.get(i);
-			for (int j = 1; j < endpointArr.length; j++) {
-				graph.findVertexByIndex(endpointArr[0]).addEdge(graph.findVertexByIndex(endpointArr[j]));	
+		System.out.println("Vertexes were added");
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(path));
+			String line;
+			while ((line = br.readLine()) != null) {
+				int[] row = Utils.convertStringArraytoIntArray(line.split("\\s+")); //Integer.parseInt(line);
+				graph.getVertexes().get(row[1]-1).addEdge(graph.getVertexes().get(row[0]-1));
+//				list.add(row);
 			}
-			
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		
-
+		System.out.println("Graph was done");
+		((ArrayList<Vertex>)graph.getVertexes()).trimToSize();
 		return graph;
 	}
 
 	public Graph reverseOrder() {
 		Graph reversGraph = new Graph();
 		for (Vertex v : vertexes) {
-			reversGraph.addVertex(new Vertex(v.getIndex(), v.getIndex()));
+			reversGraph.addVertex(new Vertex(v.getIndex()));
 		}
 		
 		for (Vertex v : vertexes) {

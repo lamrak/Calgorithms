@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Vertex {
-	private String name;
 	private int index;
 	private List<Vertex> listVertexesB = new ArrayList<Vertex>();
 	private boolean explored = false;
@@ -12,13 +11,7 @@ public class Vertex {
 	
 	private Vertex leader; //for SCCs 
 	
-	public Vertex(String name, int index) {
-		this.name = name;
-		this.index = index;
-	}
-
-	public Vertex(int name, int index) {
-		this.name = String.valueOf(name);
+	public Vertex(int index) {
 		this.index = index;
 	}
 
@@ -28,10 +21,6 @@ public class Vertex {
 
 	public int getIndex() {
 		return index;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public boolean isExplored() {
@@ -83,7 +72,7 @@ public class Vertex {
 
 	@Override
 	public String toString() {
-		return "Vertex [name=" + name + "]";
+		return "Vertex [name=" + index + "]";
 	}
 
 	@Override

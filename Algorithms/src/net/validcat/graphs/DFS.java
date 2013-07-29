@@ -15,28 +15,22 @@ public class DFS {
 			if (!vertexB.isExplored()) dfs(g, vertexB);
 		}
 		
-		if (topological) vertex.setLabel(label--); // for topological counting
-		else vertex.setLabel(++label); //for SCC
-	}
-	
-	public void dfsTopologic(Graph g) {
-		label = g.getVertexes().size();
-		
-		for (Vertex vertex : g.getVertexes()) {
-			if (!vertex.isExplored()) dfs(g, vertex);
-		}
+		vertex.setLabel(++label); //for SCC
 	}
 	
 	public void dfsLoop(Graph g) {
+		System.out.println("Start DFS loop");
 		for (Vertex vertex : g.getVertexes()) {
 			vertex.setExplored(false);
 		}
+		System.out.println("All vertexes enexplored");
 		for (int i = g.getVertexes().size(); i > 0; i--) {
 			s = g.findVertexByIndex(i);
 			if (!s.isExplored()) {
 				dfs(g, s);
 			}
 		}
+		System.out.println("DFS loop done");
 	}
 	
 	public int getLabel() {
