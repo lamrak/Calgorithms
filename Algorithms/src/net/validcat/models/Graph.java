@@ -35,11 +35,11 @@ public class Graph {
 		vertexes.remove(vertex);
 	}
 
-	public static Graph build(String path) {
+	public static Graph build(String path, long size) {
 		System.out.println("Start building Graph");
 		Graph graph = new Graph();
 		//Add vertexes
-		for (int i = 1; i <= 875714; i++) {
+		for (int i = 1; i <= size; i++) {
 			Vertex vertex = new Vertex(i);
 			graph.addVertex(vertex);
 		}
@@ -57,15 +57,24 @@ public class Graph {
 			e.printStackTrace();
 		}
 		System.out.println("Graph was done");
-		((ArrayList<Vertex>)graph.getVertexes()).trimToSize();
+		
+		trimGraphSize(graph);
+		
 		return graph;
 	}
 	
-	public static Graph buildReverse(String path) {
+	private static void trimGraphSize(Graph graph) {
+		for (Vertex vertex : graph.getVertexes()) {
+			vertex.trimVertexSize();
+		}
+		((ArrayList<Vertex>)graph.getVertexes()).trimToSize();
+	}
+
+	public static Graph buildReverse(String path, long size) {
 		System.out.println("Start building reverse Graph");
 		Graph graph = new Graph();
 		//Add vertexes
-		for (int i = 1; i <= 875714; i++) {
+		for (int i = 1; i <= size; i++) {
 			Vertex vertex = new Vertex(i);
 			graph.addVertex(vertex);
 		}
@@ -122,7 +131,7 @@ public class Graph {
 	}
 	
 	public static void main(String[] args) {
-		Graph g = build("D:\\SVN\\Git\\calgorithms\\Algorithms\\minGraph.txt");
+		Graph g = build("D:\\SVN\\Git\\calgorithms\\Algorithms\\minGraph.txt", 10);
 		printGraph(g);
 		Graph rG = g.reverseOrder();
 		printGraph(rG);

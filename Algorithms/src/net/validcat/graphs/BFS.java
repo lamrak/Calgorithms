@@ -13,7 +13,7 @@ public class BFS {
 	
 	public static void main(String[] args) {
 		BFS bfsAlg = new BFS();
-		Graph graph = Graph.build("");
+		Graph graph = Graph.build("", 0);
 		
 		bfsAlg.bfs(graph, graph.getVertexes().get(0));
 	}

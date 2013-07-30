@@ -9,8 +9,10 @@ import net.validcat.models.Vertex;
 public class StrongComponents {
 
 	public static void main(String[] args) {
-		Graph g = Graph.build("D:\\android\\Git\\algorithmes\\Algorithms\\SCC.txt");
-		Graph reversedGraph = g.reverseOrder(); //Graph.buildReverse("D:\\android\\Git\\algorithmes\\Algorithms\\minGraph.txt"); //
+		String path = "D:\\android\\Git\\algorithmes\\Algorithms\\SCC.txt";
+		long size = 875714; //875714
+		Graph g = Graph.build(path, size);
+		Graph reversedGraph = Graph.buildReverse(path, size); // g.reverseOrder(); 
 
 		DFS dfs = new DFS();
 		

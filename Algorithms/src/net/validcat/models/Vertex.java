@@ -96,5 +96,9 @@ public class Vertex {
 			return false;
 		return true;
 	}
+
+	public void trimVertexSize() {
+		((ArrayList<Vertex>)listVertexesB).trimToSize();
+	}
 	
 }
