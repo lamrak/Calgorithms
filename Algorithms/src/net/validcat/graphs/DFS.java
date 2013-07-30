@@ -9,6 +9,12 @@ public class DFS {
 	private boolean topological;
 	
 	public void dfs(Graph g, Vertex vertex) {
+		try {
+			System.out.println("DFS: " + vertex);	
+		} catch (StackOverflowError e) {
+			System.out.println(label);
+		}
+		
 		vertex.setExplored(true);
 		vertex.setLeader(s);
 		for (Vertex vertexB : vertex.getEdges()) {

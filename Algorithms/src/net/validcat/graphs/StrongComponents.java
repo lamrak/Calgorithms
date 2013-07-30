@@ -17,13 +17,14 @@ public class StrongComponents {
 		DFS dfs = new DFS();
 		
 		dfs.dfsLoop(reversedGraph);
+		System.out.println("Time has been counted");
 		for (Vertex v : g.getVertexes()) {
 			int newVertexIndex = reversedGraph.findVertexByIndex(v.getIndex()).getLabel();
 			v.setIndex(newVertexIndex);
 		}
-		
+		System.out.println("Vertixes received new idexes");
 		dfs.dfsLoop(g);
-		
+		System.out.println("DFS loop has been done");
 		//get result
 		Map<Integer, Integer> resultMap = new HashMap<Integer, Integer>();
 		System.out.println("Map is created");
