@@ -8,11 +8,11 @@ import java.util.List;
 
 import net.validcat.utils.Utils;
 
-public class Graph {
+public class GraphSCCs {
 	private List<Vertex> vertexes;
 //	private List<Edge> edges;
 	
-	public Graph() {
+	public GraphSCCs() {
 		vertexes = new ArrayList<Vertex>();
 	}
 
@@ -32,9 +32,9 @@ public class Graph {
 		vertexes.remove(vertex);
 	}
 
-	public static Graph build(String path, long size) {
+	public static GraphSCCs build(String path, long size) {
 		System.out.println("Start building Graph");
-		Graph graph = new Graph();
+		GraphSCCs graph = new GraphSCCs();
 		//Add vertexes
 		for (int i = 1; i <= size; i++) {
 			Vertex vertex = new Vertex(i);
@@ -60,16 +60,16 @@ public class Graph {
 		return graph;
 	}
 	
-	private static void trimGraphSize(Graph graph) {
+	private static void trimGraphSize(GraphSCCs graph) {
 		for (Vertex vertex : graph.getVertexes()) {
 			vertex.trimVertexSize();
 		}
 		((ArrayList<Vertex>)graph.getVertexes()).trimToSize();
 	}
 
-	public static Graph buildReverse(String path, long size) {
+	public static GraphSCCs buildReverse(String path, long size) {
 		System.out.println("Start building reverse Graph");
-		Graph graph = new Graph();
+		GraphSCCs graph = new GraphSCCs();
 		//Add vertexes
 		for (int i = 1; i <= size; i++) {
 			Vertex vertex = new Vertex(i);
@@ -93,8 +93,8 @@ public class Graph {
 		return graph;
 	}
 
-	public Graph reverseOrder() {
-		Graph reversGraph = new Graph();
+	public GraphSCCs reverseOrder() {
+		GraphSCCs reversGraph = new GraphSCCs();
 		for (Vertex v : vertexes) {
 			reversGraph.addVertex(new Vertex(v.getIndex()));
 		}
@@ -115,7 +115,7 @@ public class Graph {
 		return null;
 	}
 
-	public static void printGraph(Graph g) {
+	public static void printGraph(GraphSCCs g) {
 		System.out.println("Graph");
 		for (Vertex vertex : g.getVertexes()) {
 			vertex.printVertex();
@@ -123,14 +123,14 @@ public class Graph {
 		
 	}
 
-	private boolean contains(Vertex vertex) {
-		return vertexes.contains(vertex);
-	}
-	
+//	private boolean contains(Vertex vertex) {
+//		return vertexes.contains(vertex);
+//	}
+//	
 	public static void main(String[] args) {
-		Graph g = build("D:\\SVN\\Git\\calgorithms\\Algorithms\\minGraph.txt", 10);
+		GraphSCCs g = build("D:\\SVN\\Git\\calgorithms\\Algorithms\\minGraph.txt", 10);
 		printGraph(g);
-		Graph rG = g.reverseOrder();
+		GraphSCCs rG = g.reverseOrder();
 		printGraph(rG);
 	}
 
