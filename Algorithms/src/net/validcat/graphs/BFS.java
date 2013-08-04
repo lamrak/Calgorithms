@@ -6,8 +6,12 @@ import java.util.Queue;
 
 import net.validcat.models.SCCsGraph;
 import net.validcat.models.Vertex;
-import net.validcat.utils.Utils;
 
+/**
+ * Not tested yet
+ * @author odobrunov
+ *
+ */
 public class BFS {
 	private Queue<Vertex> queue;
 	

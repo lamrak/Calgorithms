@@ -11,9 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import net.validcat.models.SCCsGraph;
-import net.validcat.models.Vertex;
-
 public class Utils {
 
 	public static int[] readArrayFromFile(String path, int arrayLength)
@@ -83,7 +80,7 @@ public class Utils {
 	}
 	
 	public static void writeListToFile(List<int[]> input) throws IOException {
-		File file = new File("D:\\android\\Git\\algorithmes\\Algorithms\\result.txt");
+		File file = new File("result.txt");
 		 
 		// if file doesnt exists, then create it
 		if (!file.exists()) {
@@ -100,7 +97,7 @@ public class Utils {
 	}
 
 	public static void writeToFile(String str) throws IOException {
-		File file = new File("D:\\android\\Git\\algorithmes\\Algorithms\\result.txt");
+		File file = new File("result.txt");
 		// if file doesnt exists, then create it
 		if (!file.exists()) {
 			file.createNewFile();
@@ -111,7 +108,7 @@ public class Utils {
 	}
 	
 	public static void createNewFile() throws IOException {
-		File file = new File("D:\\android\\Git\\algorithmes\\Algorithms\\result.txt");
+		File file = new File("result.txt");
 		file.delete();
 	}
 	
