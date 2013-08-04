@@ -1,6 +1,6 @@
 package net.validcat.models;
 
-public class Edge {
+public class Edge implements IHeapObject {
 	private Vertex vertexA;
 	private Vertex vertexB;
 	private int cost;
@@ -30,6 +30,11 @@ public class Edge {
 	@Override
 	public String toString() {
 		return "[Edge: from: " + vertexA.getIndex() + " to: " + vertexB.getIndex() + "]";
+	}
+
+	@Override
+	public int getKey() {
+		return cost + vertexA.getDistance();
 	}
 	
 }
