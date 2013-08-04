@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import net.validcat.models.GraphSCCs;
+import net.validcat.models.SCCsGraph;
 import net.validcat.models.Vertex;
 
 public class Utils {

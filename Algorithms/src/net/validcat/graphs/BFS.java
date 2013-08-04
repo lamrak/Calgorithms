@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import net.validcat.models.GraphSCCs;
+import net.validcat.models.SCCsGraph;
 import net.validcat.models.Vertex;
 import net.validcat.utils.Utils;
 
@@ -13,12 +13,12 @@ public class BFS {
 	
 	public static void main(String[] args) {
 		BFS bfsAlg = new BFS();
-		GraphSCCs graph = GraphSCCs.build("", 0);
+		SCCsGraph graph = SCCsGraph.build("", 0);
 		
 		bfsAlg.bfs(graph, graph.getVertexes().get(0));
 	}
 	
-	public int countgraphConnectivity(GraphSCCs graph) {
+	public int countgraphConnectivity(SCCsGraph graph) {
 		int partitions = 0;
 		for (Vertex vertex : graph.getVertexes()) {
 			if (!vertex.isExplored()) {
@@ -30,7 +30,7 @@ public class BFS {
 		return partitions;
 	}
 
-	public void bfs(GraphSCCs graph, Vertex startPoint) {
+	public void bfs(SCCsGraph graph, Vertex startPoint) {
 		if (queue == null) {
 			queue = new LinkedList<Vertex>();
 			queue.offer(startPoint);

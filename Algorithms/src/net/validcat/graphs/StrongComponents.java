@@ -3,7 +3,7 @@ package net.validcat.graphs;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.validcat.models.GraphSCCs;
+import net.validcat.models.SCCsGraph;
 import net.validcat.models.Vertex;
 
 public class StrongComponents {
@@ -11,8 +11,8 @@ public class StrongComponents {
 	public static void main(String[] args) {
 		String path = "D:\\android\\Git\\algorithmes\\Algorithms\\SCC.txt";
 		long size = 875714; //875714
-		GraphSCCs g = GraphSCCs.build(path, size);
-		GraphSCCs reversedGraph = GraphSCCs.buildReverse(path, size); // g.reverseOrder(); 
+		SCCsGraph g = SCCsGraph.build(path, size);
+		SCCsGraph reversedGraph = SCCsGraph.buildReverse(path, size); // g.reverseOrder(); 
 
 		DFS dfs = new DFS();
 		

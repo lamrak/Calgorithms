@@ -1,6 +1,6 @@
 package net.validcat.graphs;
 
-import net.validcat.models.GraphSCCs;
+import net.validcat.models.SCCsGraph;
 import net.validcat.models.Vertex;
 
 public class DFS {
@@ -8,7 +8,7 @@ public class DFS {
 	private int label = 0;
 	private boolean topological;
 	
-	public void dfs(GraphSCCs g, Vertex vertex) {
+	public void dfs(SCCsGraph g, Vertex vertex) {
 		try {
 			System.out.println("DFS: " + vertex);	
 		} catch (StackOverflowError e) {
@@ -24,7 +24,7 @@ public class DFS {
 		vertex.setLabel(++label); //for SCC
 	}
 	
-	public void dfsLoop(GraphSCCs g) {
+	public void dfsLoop(SCCsGraph g) {
 		System.out.println("Start DFS loop");
 		for (Vertex vertex : g.getVertexes()) {
 			vertex.setExplored(false);
