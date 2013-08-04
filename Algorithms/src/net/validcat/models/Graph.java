@@ -6,10 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.print.attribute.standard.Finishings;
-
 import net.validcat.utils.Utils;
-
 
 public class Graph {
 	private List<Vertex> vertexes;
@@ -49,7 +46,7 @@ public class Graph {
 			String line;
 			while ((line = br.readLine()) != null) {
 				int[] row = Utils.convertStringArraytoIntArray(line.split("\\s+")); //Integer.parseInt(line);
-				graph.getVertexes().get(row[0]-1).addEdge(graph.getVertexes().get(row[1]-1));
+				graph.getVertexes().get(row[0]-1).addVertexAsEdge(graph.getVertexes().get(row[1]-1));
 //				list.add(row);
 			}
 			br.close();
@@ -84,7 +81,7 @@ public class Graph {
 			String line;
 			while ((line = br.readLine()) != null) {
 				int[] row = Utils.convertStringArraytoIntArray(line.split("\\s+")); //Integer.parseInt(line);
-				graph.getVertexes().get(row[1]-1).addEdge(graph.getVertexes().get(row[0]-1));
+				graph.getVertexes().get(row[1]-1).addVertexAsEdge(graph.getVertexes().get(row[0]-1));
 //				list.add(row);
 			}
 			br.close();
@@ -103,9 +100,9 @@ public class Graph {
 		}
 		
 		for (Vertex v : vertexes) {
-			for (Vertex vertexB : v.getEdges()) {
+			for (Vertex vertexB : v.getVertexesAsEdges()) {
 				Vertex vertexRA = reversGraph.findVertexByIndex(vertexB.getIndex());
-				vertexRA.addEdge(reversGraph.findVertexByIndex(v.getIndex()));
+				vertexRA.addVertexAsEdge(reversGraph.findVertexByIndex(v.getIndex()));
 			}
 		}
 		return reversGraph;

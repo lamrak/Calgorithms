@@ -17,7 +17,7 @@ public class DFS {
 		
 		vertex.setExplored(true);
 		vertex.setLeader(s);
-		for (Vertex vertexB : vertex.getEdges()) {
+		for (Vertex vertexB : vertex.getVertexesAsEdges()) {
 			if (!vertexB.isExplored()) dfs(g, vertexB);
 		}
 		

@@ -1,26 +1,22 @@
 package net.validcat.models;
 
-
 public class Edge {
 	private Vertex vertexA;
 	private Vertex vertexB;
-	private boolean direction = false;
+	private int cost;
 	
-	public Edge(Vertex vertexA, Vertex vertexB) {
+	public Edge(Vertex vertexA, Vertex vertexB, int cost) {
 		this.vertexA = vertexA;
 		this.vertexB = vertexB;
+		this.cost = cost;
 	}
-	
-	/**
-	 * Constructor for directed graph
-	 * @param vertexA
-	 * @param vertexB
-	 * @param direction
-	 */
-	public Edge(Vertex vertexA, Vertex vertexB, boolean direction) {
-		this.vertexA = vertexA;
-		this.vertexB = vertexB;
-		this.direction = direction;
+
+	public int getCost() {
+		return cost;
+	}
+
+	public void setCost(int cost) {
+		this.cost = cost;
 	}
 
 	public Vertex getVertexA() {
@@ -31,12 +27,9 @@ public class Edge {
 		return vertexB;
 	}
 	
-	public boolean isLoop(){
-		return vertexA.equals(vertexB);
-	}
-	
-	public boolean isDirect(){
-		return direction;
+	@Override
+	public String toString() {
+		return "[Edge: from: " + vertexA.getIndex() + " to: " + vertexB.getIndex() + "]";
 	}
 	
 }

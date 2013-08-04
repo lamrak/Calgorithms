@@ -38,7 +38,7 @@ public class BFS {
 		while (queue.size() > 0) {
 			Vertex vertex = queue.poll();
 			vertex.setExplored(true);
-			List<Vertex> edges = vertex.getEdges();
+			List<Vertex> edges = vertex.getVertexesAsEdges();
 			for (Vertex vertexB : edges) {
 				if (!vertexB.isExplored()) {
 					vertexB.setExplored(true);

@@ -6,8 +6,11 @@ import java.util.List;
 public class Vertex {
 	private int index;
 	private List<Vertex> listVertexesB = new ArrayList<Vertex>();
+	private List<Edge> edges = new ArrayList<Edge>();
+	
 	private boolean explored = false;
 	private int label = 0;
+	private int distance;
 	
 	private Vertex leader; //for SCCs 
 	
@@ -31,20 +34,36 @@ public class Vertex {
 		this.explored = explored;
 	}
 	
-	public List<Vertex> getEdges() {
+	public List<Vertex> getVertexesAsEdges() {
 		return listVertexesB;
 	}
 
-	public void setEdges(List<Vertex> edges) {
+	public void setVertexesAsEdges(List<Vertex> edges) {
 		this.listVertexesB = edges;
 	}
 	
-	public void addEdge(Vertex vertexB) {
+	public void addVertexAsEdge(Vertex vertexB) {
 		listVertexesB.add(vertexB);
 	}
 	
-	public void removeEdge(Vertex vertexB) {
+	public void removeVertexAsEdge(Vertex vertexB) {
 		listVertexesB.remove(vertexB);
+	}
+	
+	public int getDistance() {
+		return distance;
+	}
+
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+	
+	public List<Edge> getEdges() {
+		return edges;
+	}
+
+	public void addEdge(Edge edge) {
+		edges.add(edge);
 	}
 
 	public int getLabel() {
