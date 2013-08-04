@@ -1,4 +1,4 @@
-package net.validcat.mincuts;
+package net.validcat.graphs;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,6 +8,11 @@ import java.util.List;
 import net.validcat.utils.StdRandom;
 import net.validcat.utils.Utils;
 
+/**
+ * Find minimum cuts Algorithm
+ * @author user
+ *
+ */
 public class KargerAlgorithm {
 	private static long min = 10000; //this value will be replaced by min cuts value 
 	
