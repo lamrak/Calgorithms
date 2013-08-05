@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class Heap<T extends Comparable> implements Iterable<Comparable>, Iterator<Comparable> {
+public class Heap<T extends Comparable<?>> implements Iterable<Comparable>, Iterator<Comparable> {
 	private List<Comparable> heap;
 	private int position;
 	
@@ -20,10 +20,12 @@ public class Heap<T extends Comparable> implements Iterable<Comparable>, Iterato
 		Comparable p = (Comparable) heap.get(pInd);
 		
 		while (t.compareTo(p) == -1) {
-			heap.remove(pInd);
-			heap.add(pInd, t);
-			heap.remove(tInd);
-			heap.add(tInd, p);
+			heap.set(pInd, t);
+			heap.set(tInd, p);
+//			heap.remove(pInd);
+//			heap.add(pInd, t);
+//			heap.remove(tInd);
+//			heap.add(tInd, p);
 			
 			tInd = pInd;
 			pInd = tInd/2;
@@ -39,17 +41,18 @@ public class Heap<T extends Comparable> implements Iterable<Comparable>, Iterato
 		if (heap.size() == 0) {
 			return returnValue;
 		}
-		heap.remove(pInd);
-		heap.add(pInd, p);
+		heap.set(pInd, p);
+//		heap.remove(pInd);
+//		heap.add(pInd, p);
 		int tInd = getTInd(pInd);
 
 		Comparable t = (Comparable) heap.get(tInd);
 		
 		while (t.compareTo(p) == -1 && (2*pInd)+1 < heap.size()-1) {
-			heap.remove(tInd);
-			heap.remove(pInd);
-			heap.add(pInd, t);
-			heap.add(tInd, p);
+//			heap.remove(tInd);
+//			heap.remove(pInd);
+			heap.set(pInd, t);
+			heap.set(tInd, p);
 			
 			pInd = tInd;
 			tInd = getTInd(pInd);
@@ -93,7 +96,6 @@ public class Heap<T extends Comparable> implements Iterable<Comparable>, Iterato
 	}
 
 	public void removeAll(List<T> temp) {
-		position = position - temp.size()-1;
 		heap.removeAll(temp);
 	}
 	

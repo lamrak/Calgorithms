@@ -15,8 +15,8 @@ public class DijkstraHeap {
 	private Heap<Edge> heap = new Heap<Edge>();
 	
 	public static void main(String[] args) throws IOException {
-		String path = "dijkstraTiny.txt";
-		int numOfVertexes = 6;
+		String path = "dijkstraData.txt";
+		int numOfVertexes = 200;
 		
 		long startTime = System.currentTimeMillis();
 		DijkstraHeap dijkstra = new DijkstraHeap();
