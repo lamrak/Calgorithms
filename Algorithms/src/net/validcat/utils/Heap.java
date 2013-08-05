@@ -2,27 +2,24 @@ package net.validcat.utils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
-import net.validcat.models.Edge;
-import net.validcat.models.IHeapObject;
 
-public class Heap implements Iterable<IHeapObject>, Iterator<IHeapObject> {
-	private List<IHeapObject> heap;
+public class Heap<T extends Comparable> implements Iterable<Comparable>, Iterator<Comparable> {
+	private List<Comparable> heap;
 	private int position;
 	
 	public Heap() {
-		heap = new ArrayList<IHeapObject>();
+		heap = new ArrayList<Comparable>();
 	}
 
-	public void insert(IHeapObject t) {
-		int tInd = heap.size();
-		int pInd = tInd/2;
+	public void insert(Comparable t) {
 		heap.add(t);
-		IHeapObject p = heap.get(pInd);
+		int tInd = heap.size()-1;
+		int pInd = (tInd % 2 == 0 && tInd != 0 ? tInd-1 : tInd)/2;
+		Comparable p = (Comparable) heap.get(pInd);
 		
-		while (t.getKey() < p.getKey()) {
+		while (t.compareTo(p) == -1) {
 			heap.remove(pInd);
 			heap.add(pInd, t);
 			heap.remove(tInd);
@@ -37,22 +34,35 @@ public class Heap implements Iterable<IHeapObject>, Iterator<IHeapObject> {
 	public Object extractMin() {
 		int pInd = 0;
 		Object returnValue = heap.get(pInd);
-		IHeapObject p = heap.get(heap.size());
+		Comparable p = (Comparable) heap.get(heap.size()-1);
+		heap.remove(heap.size()-1);
+		if (heap.size() == 0) {
+			return returnValue;
+		}
+		heap.remove(pInd);
 		heap.add(pInd, p);
+		int tInd = getTInd(pInd);
+
+		Comparable t = (Comparable) heap.get(tInd);
 		
-		int tInd = (heap.get(2*pInd+1) == null || heap.get(2*pInd).getKey() < heap.get(2*pInd+1).getKey()) ? 2*pInd : (2*pInd+1); 
-		IHeapObject t = heap.get(tInd);
-		
-		while (p.getKey() > t.getKey() && 2*pInd < heap.size()) {
+		while (t.compareTo(p) == -1 && (2*pInd)+1 < heap.size()-1) {
+			heap.remove(tInd);
+			heap.remove(pInd);
 			heap.add(pInd, t);
 			heap.add(tInd, p);
 			
 			pInd = tInd;
-			tInd = (2*pInd+1 < heap.size() && heap.get(2*pInd).getKey() < heap.get(2*pInd+1).getKey()) ? 2*pInd : (2*pInd+1);
+			tInd = getTInd(pInd);
 			t = heap.get(tInd);
 		}
 		
 		return returnValue;
+	}
+	
+	private int getTInd(int pInd){
+		return 2*pInd+1 > heap.size()-1 ? 0 : 2*(pInd+1) > heap.size()-1  
+				? 2*pInd + 1 : heap.get((2*pInd)+1).compareTo(heap.get(2*(pInd+1))) != -1 
+						? 2*(pInd+1) : 2*pInd+1;
 	}
 
 	public boolean isEmpty() {
@@ -67,7 +77,7 @@ public class Heap implements Iterable<IHeapObject>, Iterator<IHeapObject> {
 	}
 
 	@Override
-	public IHeapObject next() {
+	public Comparable next() {
 		return heap.get(position++);
 	}
 
@@ -77,11 +87,13 @@ public class Heap implements Iterable<IHeapObject>, Iterator<IHeapObject> {
 	}
 
 	@Override
-	public Iterator<IHeapObject> iterator() {
+	public Iterator<Comparable> iterator() {
+		position = 0;
 		return this;
 	}
 
-	public void removeAll(List<Edge> temp) {
+	public void removeAll(List<T> temp) {
+		position = position - temp.size()-1;
 		heap.removeAll(temp);
 	}
 	

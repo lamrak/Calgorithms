@@ -1,6 +1,6 @@
 package net.validcat.models;
 
-public class Edge implements IHeapObject {
+public class Edge implements Comparable<Edge> {
 	private Vertex vertexA;
 	private Vertex vertexB;
 	private int cost;
@@ -33,8 +33,9 @@ public class Edge implements IHeapObject {
 	}
 
 	@Override
-	public int getKey() {
-		return cost + vertexA.getDistance();
+	public int compareTo(Edge o) {
+		return getCost() + getVertexA().getDistance() > o.getCost() + o.getVertexA().getDistance() ? 1 
+				: getCost() + getVertexA().getDistance() < o.getCost() + o.getVertexA().getDistance() ? -1 : 0; 
 	}
 	
 }

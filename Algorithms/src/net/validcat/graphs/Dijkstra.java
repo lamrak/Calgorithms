@@ -15,14 +15,16 @@ public class Dijkstra {
 	public static void main(String[] args) throws IOException {
 		String path = "dijkstraData.txt";
 		int numOfVertexes = 200;
-		
+
+		long startTime = System.currentTimeMillis();
 		Dijkstra dijkstra = new Dijkstra();
 		DijkstraGraph g = dijkstra.init(path, numOfVertexes);
 		dijkstra.shortestPath(g, g.findVertexBiIndex(1));
+		System.out.println(System.currentTimeMillis() - startTime);
 		
-		for (int i = 1; i <= numOfVertexes; i++) {
-			System.out.println("To: " + i + " length: " + distTo[i-1]);	
-		}
+//		for (int i = 1; i <= numOfVertexes; i++) {
+//			System.out.println("To: " + i + " length: " + distTo[i-1]);	
+//		}
 	}
 	
 	private DijkstraGraph init(String path, int numOfVertexes) throws IOException {

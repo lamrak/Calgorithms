@@ -6,23 +6,23 @@ import java.util.List;
 
 import net.validcat.models.DijkstraGraph;
 import net.validcat.models.Edge;
-import net.validcat.models.IHeapObject;
 import net.validcat.models.Vertex;
 import net.validcat.utils.Heap;
 
 public class DijkstraHeap {
 	private static int[] distTo;
 //	private List<Edge> stack = new ArrayList<Edge>();
-	private Heap heap = new Heap();
+	private Heap<Edge> heap = new Heap<Edge>();
 	
 	public static void main(String[] args) throws IOException {
 		String path = "dijkstraTiny.txt";
 		int numOfVertexes = 6;
 		
+		long startTime = System.currentTimeMillis();
 		DijkstraHeap dijkstra = new DijkstraHeap();
 		DijkstraGraph g = dijkstra.init(path, numOfVertexes);
 		dijkstra.shortestPath(g, g.findVertexBiIndex(1));
-		
+		System.out.println(System.currentTimeMillis() - startTime);
 		for (int i = 1; i <= numOfVertexes; i++) {
 			System.out.println("To: " + i + " length: " + distTo[i-1]);	
 		}
@@ -59,8 +59,8 @@ public class DijkstraHeap {
 
 	private void clearStack(Edge minEdge) {
 		List<Edge> temp = new ArrayList<Edge>();
-		for (IHeapObject heapObj : heap) {
-			Edge edge = (Edge) heapObj;
+		for (Object hEdge : heap) {
+			Edge edge = (Edge) hEdge;
 			if (edge.getVertexB() == minEdge.getVertexB()) {
 				temp.add(edge);
 			}
