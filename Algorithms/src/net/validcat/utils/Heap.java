@@ -5,38 +5,33 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class Heap<T extends Comparable<?>> implements Iterable<Comparable>, Iterator<Comparable> {
-	private List<Comparable> heap;
+public class Heap<T extends Comparable<T>> implements Iterable<Comparable<T>>, Iterator<Comparable<T>> {
+	private List<Comparable<T>> heap;
 	private int position;
 	
 	public Heap() {
-		heap = new ArrayList<Comparable>();
+		heap = new ArrayList<Comparable<T>>();
 	}
 
-	public void insert(Comparable t) {
+	public void insert(T t) {
 		heap.add(t);
 		int tInd = heap.size()-1;
 		int pInd = (tInd % 2 == 0 && tInd != 0 ? tInd-1 : tInd)/2;
-		Comparable p = (Comparable) heap.get(pInd);
+		T p = (T) heap.get(pInd);
 		
 		while (t.compareTo(p) == -1) {
 			heap.set(pInd, t);
 			heap.set(tInd, p);
-//			heap.remove(pInd);
-//			heap.add(pInd, t);
-//			heap.remove(tInd);
-//			heap.add(tInd, p);
-			
 			tInd = pInd;
 			pInd = tInd/2;
-			p = heap.get(pInd);
+			p = (T) heap.get(pInd);
 		}
 	}
 	
-	public Object extractMin() {
+	public T extractMin() {
 		int pInd = 0;
-		Object returnValue = heap.get(pInd);
-		Comparable p = (Comparable) heap.get(heap.size()-1);
+		T returnValue = (T) heap.get(pInd);
+		Comparable<T> p = (Comparable<T>) heap.get(heap.size()-1);
 		heap.remove(heap.size()-1);
 		if (heap.size() == 0) {
 			return returnValue;
@@ -46,9 +41,9 @@ public class Heap<T extends Comparable<?>> implements Iterable<Comparable>, Iter
 //		heap.add(pInd, p);
 		int tInd = getTInd(pInd);
 
-		Comparable t = (Comparable) heap.get(tInd);
+		Comparable<T> t = (Comparable<T>) heap.get(tInd);
 		
-		while (t.compareTo(p) == -1 && (2*pInd)+1 < heap.size()-1) {
+		while (t.compareTo((T) p) == -1 && (2*pInd)+1 < heap.size()-1) {
 //			heap.remove(tInd);
 //			heap.remove(pInd);
 			heap.set(pInd, t);
@@ -64,7 +59,7 @@ public class Heap<T extends Comparable<?>> implements Iterable<Comparable>, Iter
 	
 	private int getTInd(int pInd){
 		return 2*pInd+1 > heap.size()-1 ? 0 : 2*(pInd+1) > heap.size()-1  
-				? 2*pInd + 1 : heap.get((2*pInd)+1).compareTo(heap.get(2*(pInd+1))) != -1 
+				? 2*pInd + 1 : heap.get((2*pInd)+1).compareTo((T) heap.get(2*(pInd+1))) != -1 
 						? 2*(pInd+1) : 2*pInd+1;
 	}
 
@@ -80,7 +75,7 @@ public class Heap<T extends Comparable<?>> implements Iterable<Comparable>, Iter
 	}
 
 	@Override
-	public Comparable next() {
+	public Comparable<T> next() {
 		return heap.get(position++);
 	}
 
@@ -90,7 +85,7 @@ public class Heap<T extends Comparable<?>> implements Iterable<Comparable>, Iter
 	}
 
 	@Override
-	public Iterator<Comparable> iterator() {
+	public Iterator<Comparable<T>> iterator() {
 		position = 0;
 		return this;
 	}

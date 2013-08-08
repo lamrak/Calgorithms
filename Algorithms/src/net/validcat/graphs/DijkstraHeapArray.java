@@ -9,7 +9,7 @@ import net.validcat.models.Edge;
 import net.validcat.models.Vertex;
 import net.validcat.utils.Heap;
 
-public class DijkstraHeap {
+public class DijkstraHeapArray {
 	private static int[] distTo;
 //	private List<Edge> stack = new ArrayList<Edge>();
 	private Heap<Edge> heap = new Heap<Edge>();
@@ -19,7 +19,7 @@ public class DijkstraHeap {
 		int numOfVertexes = 200;
 		
 		long startTime = System.currentTimeMillis();
-		DijkstraHeap dijkstra = new DijkstraHeap();
+		DijkstraHeapArray dijkstra = new DijkstraHeapArray();
 		DijkstraGraph g = dijkstra.init(path, numOfVertexes);
 		dijkstra.shortestPath(g, g.findVertexBiIndex(1));
 		long endTime = System.currentTimeMillis();
