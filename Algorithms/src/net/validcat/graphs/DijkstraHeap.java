@@ -7,12 +7,12 @@ import java.util.List;
 import net.validcat.models.DijkstraGraph;
 import net.validcat.models.Edge;
 import net.validcat.models.Vertex;
-import net.validcat.utils.Heap;
+import net.validcat.utils.HeapMin;
 
 public class DijkstraHeap {
 	private static int[] distTo;
 //	private List<Edge> stack = new ArrayList<Edge>();
-	private Heap<Edge> heap = new Heap<Edge>();
+	private HeapMin<Edge> heap = new HeapMin<Edge>();
 	
 	public static void main(String[] args) throws IOException {
 		String path = "dijkstraData.txt";
