@@ -1,11 +1,11 @@
 package net.validcat.utils;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
-
+/**
+ * Heap realization based on array is not implemented yet
+ */
+@SuppressWarnings("unchecked")
 public class HeapArr<T extends Comparable<T>> implements Iterable<Comparable<T>>, Iterator<Comparable<T>> {
 	private T[] heap;
 	private int position;

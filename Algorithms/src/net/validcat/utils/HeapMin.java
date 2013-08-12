@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
+@SuppressWarnings("unchecked")
 public class HeapMin<T extends Comparable<T>> implements Iterable<Comparable<T>>, Iterator<Comparable<T>> {
 	private List<Comparable<T>> heap;
 	private int position;
