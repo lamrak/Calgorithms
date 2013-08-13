@@ -26,6 +26,32 @@ public class Utils {
 
 		return inputArray;
 	}
+	
+	public static long[] readLongArrayFromFile(String path, int arrayLength) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(path));
+		long[] longArray = new long[arrayLength];
+		int i = 0;
+		String line;
+		while ((line = br.readLine()) != null) {
+			longArray[i++] = Long.parseLong(line);
+		}
+		br.close();
+		
+		return longArray;
+	}
+	
+	public static List<Long> readLongListFromFile(String path, int arrayLength) throws IOException {
+		BufferedReader br = new BufferedReader(new FileReader(path));
+		List<Long> list = new ArrayList<Long>();
+		String line;
+		while ((line = br.readLine()) != null) {
+			list.add(Long.parseLong(line));
+		}
+		br.close();
+		
+		((ArrayList<Long>)list).trimToSize();
+		return list;
+	}
 
 	public static List<int[]> readDataFromFileAsList(String path) throws IOException {
 		List<int[]> list = new ArrayList<int[]>(200);
