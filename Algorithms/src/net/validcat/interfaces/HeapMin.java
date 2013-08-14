@@ -1,11 +1,12 @@
-package net.validcat.utils;
+package net.validcat.interfaces;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
 @SuppressWarnings("unchecked")
-public class HeapMin<T extends Comparable<T>> implements Iterable<Comparable<T>>, Iterator<Comparable<T>> {
+public class HeapMin<T extends Comparable<T>> implements Heap<T> {
 	private List<Comparable<T>> heap;
 	private int position;
 	
@@ -13,7 +14,8 @@ public class HeapMin<T extends Comparable<T>> implements Iterable<Comparable<T>>
 		heap = new ArrayList<Comparable<T>>();
 	}
 
-	public void insert(T t) {
+	@Override
+	public void insert(Comparable<T> t) {
 		heap.add(t);
 		int tInd = heap.size()-1;
 		int pInd = (tInd % 2 == 0 && tInd != 0 ? tInd-1 : tInd)/2;
@@ -28,7 +30,7 @@ public class HeapMin<T extends Comparable<T>> implements Iterable<Comparable<T>>
 		}
 	}
 	
-	public T extractMin() {
+	public T extract() {
 		int pInd = 0;
 		T returnValue = null;
 		try {
@@ -63,7 +65,24 @@ public class HeapMin<T extends Comparable<T>> implements Iterable<Comparable<T>>
 				? 2*pInd + 1 : heap.get((2*pInd)+1).compareTo((T) heap.get(2*(pInd+1))) != -1 
 						? 2*(pInd+1) : 2*pInd+1;
 	}
+	
+	public T get() {
+		return (T) heap.get(0);
+	}
+	
+	/**
+	 * Returns the number of elements in this Heap.
+	 * @return the number of elements in this Heap.
+	 */
+	public int size() {
+		return heap.size();
+	}
 
+	/**
+	 * Returns whether this Heap contains no elements.
+	 * @return <code>true</code> if this heap has no elements, false otherwise.
+	 * @see <code>size()</code>; 
+	 */
 	public boolean isEmpty() {
 		if (heap.size() == 0) return true;
 		else return false;
@@ -90,18 +109,6 @@ public class HeapMin<T extends Comparable<T>> implements Iterable<Comparable<T>>
 		position = 0;
 		return this;
 	}
-
-	public void removeAll(List<T> temp) {
-		heap.removeAll(temp);
-	}
-	
-	public T getMin() {
-		return (T) heap.get(0);
-	}
-	
-	public int size() {
-		return heap.size();
-	}
 	
 	public static void main(String[] args) {
 		Integer[] a = {1,6,4,7,2,10,9,8,3,5,11};
@@ -111,7 +118,7 @@ public class HeapMin<T extends Comparable<T>> implements Iterable<Comparable<T>>
 		}
 		
 		for (int i = 0; i < a.length; i++) {
-			System.out.println(heap.extractMin());
+			System.out.println(heap.extract());
 		}
 		
 	}

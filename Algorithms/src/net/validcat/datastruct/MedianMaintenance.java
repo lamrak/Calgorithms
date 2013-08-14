@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import net.validcat.interfaces.HeapMin;
 import net.validcat.utils.HeapMax;
-import net.validcat.utils.HeapMin;
 import net.validcat.utils.Utils;
 
 public class MedianMaintenance {
@@ -37,14 +37,14 @@ public class MedianMaintenance {
 			else heapMax.insert(value);
 			
 			//balance
-			if (heapMin.size() - heapMax.size() > 1) heapMax.insert(heapMin.extractMin());
+			if (heapMin.size() - heapMax.size() > 1) heapMax.insert(heapMin.extract());
 			else if (heapMax.size() - heapMin.size() > 1) heapMin.insert(heapMax.extractMax());
 			
 			//Wich an element k/2 or (k+1)/2 we take
 			int size = heapMin.size() + heapMax.size();
 			int index = size % 2 == 0 ? size/2 : (size+1)/2;
 			//count
-			mediance += (heapMax.size() < index) ? heapMin.getMin() : heapMax.getMax();
+			mediance += (heapMax.size() < index) ? heapMin.get() : heapMax.getMax();
 		}
 		
 		System.out.println(mediance);

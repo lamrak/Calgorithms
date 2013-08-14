@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.validcat.interfaces.HeapMin;
 import net.validcat.models.DijkstraGraph;
 import net.validcat.models.Edge;
 import net.validcat.models.Vertex;
-import net.validcat.utils.HeapMin;
 
 public class DijkstraHeapArray {
 	private static int[] distTo;
@@ -38,7 +38,7 @@ public class DijkstraHeapArray {
 		handleVertex(start, 0);
 		while (!heap.isEmpty()) { // while stack not empty
 			// Compare to Edges for minimum
-			Edge minEdge = (Edge) heap.extractMin();
+			Edge minEdge = (Edge) heap.extract();
 			Vertex vertexB = minEdge.getVertexB();
 			handleVertex(vertexB, minEdge.getVertexA().getDistance() + minEdge.getCost());
 			// delete all new vertexe's in-edges from stack	
@@ -69,7 +69,7 @@ public class DijkstraHeapArray {
 				temp.add(edge);
 			}
 		}
-		heap.removeAll(temp);
+//		heap.removeAll(temp);
 	}
 
 //	private Edge findMinEdge() {

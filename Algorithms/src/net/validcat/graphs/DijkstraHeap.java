@@ -1,17 +1,15 @@
 package net.validcat.graphs;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
+import net.validcat.interfaces.HeapMin;
 import net.validcat.models.DijkstraGraph;
 import net.validcat.models.Edge;
 import net.validcat.models.Vertex;
-import net.validcat.utils.HeapMin;
 
 public class DijkstraHeap {
 	private static int[] distTo;
-//	private List<Edge> stack = new ArrayList<Edge>();
 	private HeapMin<Edge> heap = new HeapMin<Edge>();
 	
 	public static void main(String[] args) throws IOException {
@@ -37,13 +35,20 @@ public class DijkstraHeap {
 	private void shortestPath(DijkstraGraph g, Vertex start) {
 		handleVertex(start, 0);
 		while (!heap.isEmpty()) { // while stack not empty
-			// Compare to Edges for minimum
-			Edge minEdge = (Edge) heap.extractMin();
+			// Compare to Edges for minimum, deleted explored nodes
+			Edge minEdge = getMinEdge();
+			if (minEdge == null) return; //heap is empty
 			Vertex vertexB = minEdge.getVertexB();
 			handleVertex(vertexB, minEdge.getVertexA().getDistance() + minEdge.getCost());
-			// delete all new vertexe's in-edges from stack	
-			clearStack(minEdge);
 		}
+	}
+
+	private Edge getMinEdge() {
+		Edge minEdge = (Edge) heap.extract();
+		while (minEdge != null && minEdge.getVertexB().isExplored()) {
+			minEdge = (Edge) heap.extract();
+		}
+		return minEdge;
 	}
 
 	/**
@@ -55,37 +60,10 @@ public class DijkstraHeap {
 		vertex.setExplored(true);
 		vertex.setDistance(distance);
 		distTo[vertex.getIndex()-1] = vertex.getDistance();
-		addBoundEdgesStack(vertex.getEdges());
+		addBoundEdges(vertex.getEdges());
 	}
 
-	private void clearStack(Edge minEdge) {
-		List<Edge> temp = new ArrayList<Edge>();
-		for (Object hEdge : heap) {
-			Edge edge = (Edge) hEdge;
-			if (edge.getVertexB() == minEdge.getVertexB()) {
-				temp.add(edge);
-			}
-			if (edge.getVertexB() == minEdge.getVertexA() && edge.getVertexA() == minEdge.getVertexB()) {
-				temp.add(edge);
-			}
-		}
-		heap.removeAll(temp);
-	}
-
-//	private Edge findMinEdge() {
-//		Edge minCostEdge = stack.get(0);
-//		int cost = minCostEdge.getCost() + minCostEdge.getVertexA().getDistance();
-//		for (int i = 1; i < stack.size(); i++) { // assume that first (0) is min
-//			Edge edge = stack.get(i);
-//			if ((edge.getCost() + edge.getVertexA().getDistance()) < cost && !edge.getVertexB().isExplored()) {
-//				minCostEdge = stack.get(i);
-//				cost = minCostEdge.getCost() + minCostEdge.getVertexA().getDistance();
-//			}
-//		}
-//		return minCostEdge;
-//	}
-
-	private void addBoundEdgesStack(List<Edge> edges) {
+	private void addBoundEdges(List<Edge> edges) {
 		for (Edge edge : edges) {
 			if (!edge.getVertexB().isExplored()) heap.insert(edge);
 		}
