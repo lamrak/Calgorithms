@@ -3,14 +3,16 @@ package net.validcat.graphs;
 import java.io.IOException;
 import java.util.List;
 
+import net.validcat.interfaces.Heap;
 import net.validcat.interfaces.HeapMin;
+import net.validcat.interfaces.HeapMinList;
 import net.validcat.models.DijkstraGraph;
 import net.validcat.models.Edge;
 import net.validcat.models.Vertex;
 
 public class DijkstraHeap {
 	private static int[] distTo;
-	private HeapMin<Edge> heap = new HeapMin<Edge>();
+	private Heap<Edge> heap = new HeapMin<Edge>();
 	
 	public static void main(String[] args) throws IOException {
 		String path = "dijkstraData.txt";

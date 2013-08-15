@@ -1,73 +1,86 @@
 package net.validcat.interfaces;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
-
-@SuppressWarnings("unchecked")
-public class HeapMin<T extends Comparable<T>> implements Heap<T> {
-	private List<Comparable<T>> heap;
+public class HeapMin<T extends Comparable<T>> implements Heap<T>, Cloneable, java.io.Serializable {
+	private static final long serialVersionUID = 4909408597188159120L;
+	private transient Object[] heap;
 	private int position;
+	private int size = 0;
 	
 	public HeapMin() {
-		heap = new ArrayList<Comparable<T>>();
+		heap = new Object[1600];
 	}
 
-	@Override
+	public HeapMin(int capacity) {
+		heap = new Object[capacity];
+	}
+	
+	@SuppressWarnings("unchecked")
 	public void insert(Comparable<T> t) {
-		heap.add(t);
-		int tInd = heap.size()-1;
+		rangeCheckForAdd(size++);
+		heap[size] = t;
+		int tInd = size-1;
 		int pInd = (tInd % 2 == 0 && tInd != 0 ? tInd-1 : tInd)/2;
-		T p = (T) heap.get(pInd);
+		T p = (T) heap[pInd];
 		
 		while (t.compareTo(p) == -1) {
-			heap.set(pInd, t);
-			heap.set(tInd, p);
+			heap[pInd] = t;
+			heap[tInd] = p;
 			tInd = pInd;
 			pInd = (tInd % 2 == 0 && tInd != 0 ? tInd-1 : tInd)/2;
-			p = (T) heap.get(pInd);
+			p = (T) heap[pInd];
 		}
 	}
 	
+	/**
+	 * Extract a minimum value from heap. Value will be eliminated from this heap.
+	 * 
+	 * If you want to get value without deleting, look at <code>get()</code>
+	 * @return minimum value from this heap or null if heap is empty
+	 * @see <code>isEmpty()</code>, <code>get()</code>
+	 */
+	@SuppressWarnings("unchecked")
 	public T extract() {
+		if (size == 0) return null; 
 		int pInd = 0;
-		T returnValue = null;
-		try {
-			returnValue = (T) heap.get(pInd);
-		} catch (Exception e) {
-			return null;
-		}
-		Comparable<T> p = (Comparable<T>) heap.get(heap.size()-1);
-		heap.remove(heap.size()-1);
-		if (heap.size() == 0) {
-			return returnValue;
-		}
-		heap.set(pInd, p);
+		T returnValue = (T) heap[pInd];
+		Comparable<T> p = (Comparable<T>) heap[size-1];
+		heap[--size] = null;
+		if (size == 0) return returnValue;
+
+		heap[pInd] = p;
 		int tInd = getTInd(pInd);
 
-		Comparable<T> t = (Comparable<T>) heap.get(tInd);
-		
-		while (t.compareTo((T) p) == -1 && (2*pInd)+1 <= heap.size()-1) {
-			heap.set(pInd, t);
-			heap.set(tInd, p);
-			
+		Comparable<T> t = (Comparable<T>) heap[tInd];
+		while (t.compareTo((T) p) == -1 && (2*pInd)+1 <= size-1) {
+			heap[pInd] = t;
+			heap[tInd] = p;
 			pInd = tInd;
 			tInd = getTInd(pInd);
-			t = heap.get(tInd);
+			t = (T) heap[tInd];
 		}
 		
 		return returnValue;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private int getTInd(int pInd){
-		return 2*pInd+1 > heap.size()-1 ? 0 : 2*(pInd+1) > heap.size()-1  
-				? 2*pInd + 1 : heap.get((2*pInd)+1).compareTo((T) heap.get(2*(pInd+1))) != -1 
+		return 2*pInd+1 > size-1 ? 0 : 2*(pInd+1) > size-1  
+				? 2*pInd + 1 : ((T) heap[(2*pInd)+1]).compareTo((T) heap[2*(pInd+1)]) != -1 
 						? 2*(pInd+1) : 2*pInd+1;
 	}
 	
+	/**
+	 * Get a minimum value from this heap without deleting it. 
+	 * If you want to extract minimum value from the heap with eliminating, look at <code>extract()</code>
+	 * @return minimum value from this heap or null if heap is empty
+	 * @see <code>extract()</code>, <code>isEmpty()</code>
+	 */
+	@SuppressWarnings("unchecked")
 	public T get() {
-		return (T) heap.get(0);
+		if (size == 0) return null;
+		else return (T) heap[0];
 	}
 	
 	/**
@@ -75,7 +88,7 @@ public class HeapMin<T extends Comparable<T>> implements Heap<T> {
 	 * @return the number of elements in this Heap.
 	 */
 	public int size() {
-		return heap.size();
+		return size;
 	}
 
 	/**
@@ -84,19 +97,19 @@ public class HeapMin<T extends Comparable<T>> implements Heap<T> {
 	 * @see <code>size()</code>; 
 	 */
 	public boolean isEmpty() {
-		if (heap.size() == 0) return true;
+		if (size == 0) return true;
 		else return false;
 	}
 
-	@Override
 	public boolean hasNext() {
-		if (position >= heap.size() || heap.get(position) == null) return false;
+		if (position >= size || heap[position] == null) return false;
 		else return true;
 	}
 
-	@Override
-	public Comparable<T> next() {
-		return heap.get(position++);
+	@SuppressWarnings("unchecked")
+	public T next() {
+		int i = position++;
+		return (T) heap[i];
 	}
 
 	@Override
@@ -105,21 +118,36 @@ public class HeapMin<T extends Comparable<T>> implements Heap<T> {
 	}
 
 	@Override
-	public Iterator<Comparable<T>> iterator() {
+	public Iterator<T> iterator() {
 		position = 0;
 		return this;
 	}
+
+	private void rangeCheckForAdd(int index) {
+		if (index < 0 || index > this.size)
+			throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+	}
+		
+	private String outOfBoundsMsg(int index) {
+		return "Index: " + index + ", Size: " + this.size;
+	}
 	
 	public static void main(String[] args) {
-		Integer[] a = {1,6,4,7,2,10,9,8,3,5,11};
+		Integer[] a = {1,6,4,7,2,10,9,8,3,5};
 		HeapMin<Integer> heap = new HeapMin<Integer>();
+		//test insert
 		for (int i = 0; i < a.length; i++) {
 			heap.insert(a[i]);
 		}
-		
+		// test comparator
+		for (Integer item : heap) {
+			System.out.println(item);
+		}
+		// test extract
 		for (int i = 0; i < a.length; i++) {
 			System.out.println(heap.extract());
 		}
+		heap.extract();
 		
 	}
 	

@@ -2,7 +2,7 @@ package net.validcat.interfaces;
 
 import java.util.Iterator;
 
-public interface Heap<T extends Comparable<T>> extends Iterable<Comparable<T>>, Iterator<Comparable<T>> {
+public interface Heap<T extends Comparable<T>> extends Iterable<T>, Iterator<T> {
 	
 	T extract();
 	T get();
