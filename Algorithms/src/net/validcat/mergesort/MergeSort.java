@@ -13,8 +13,9 @@ public class MergeSort {
 	 * @throws NumberFormatException 
 	 */
 	public static void main(String[] args) throws NumberFormatException, IOException {
-				MergeSort ms = new MergeSort();
-		System.out.println(Arrays.toString(ms.divide(ms.readFile())));
+		MergeSort ms = new MergeSort();
+		int[] a = {5, 3, 8, 9, 1, 7, 0, 2, 6, 4};
+		System.out.println(Arrays.toString(ms.divide(a)));
 	}
 	
 	private int[] readFile() throws IOException{
@@ -63,25 +64,6 @@ public class MergeSort {
 		}
 		
 		return output;
-		
-// or the same with recursion call		
-//		if (left[i] < right[j]) {
-//			output[z++] = left[i++];
-//			if (i == left.length) return addRest(j, z, output, right);
-//		} else {
-//			output[z++] = right[j++];
-//			if (j == right.length) return addRest(i, z, output, left);
-//		}
-//		
-//		return merge(i, j, z, output, left, right);
 	}
 	
-	@SuppressWarnings("unused")
-	private int[] addRest(int arrIndex, int outIndex, int[] output, int[] array) {
-		for (int k = arrIndex; k < array.length; k++) {
-			output[outIndex++] = array[k];
-		}
-		return output;
-	}
-
 }
