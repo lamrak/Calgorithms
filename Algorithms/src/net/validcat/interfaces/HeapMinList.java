@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
 @SuppressWarnings("unchecked")
 public class HeapMinList<T extends Comparable<T>> implements Heap<T> {
 	private List<Comparable<T>> heap;

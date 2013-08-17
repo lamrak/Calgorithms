@@ -1,4 +1,4 @@
-package net.validcat.datastruct;
+package net.validcat.other;
 
 import java.io.IOException;
 import java.util.ArrayList;
