@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.util.List;
 
 import net.validcat.interfaces.Heap;
-import net.validcat.interfaces.HeapMin;
-import net.validcat.interfaces.HeapMinList;
 import net.validcat.models.DijkstraGraph;
 import net.validcat.models.Edge;
 import net.validcat.models.Vertex;
+import net.validcat.structure.HeapMin;
+import net.validcat.structure.HeapMinList;
 
 public class DijkstraHeap {
 	private static int[] distTo;

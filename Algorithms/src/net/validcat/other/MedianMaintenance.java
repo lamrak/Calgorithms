@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import net.validcat.interfaces.HeapMin;
+import net.validcat.structure.HeapMin;
 import net.validcat.utils.HeapMax;
 import net.validcat.utils.Utils;
 

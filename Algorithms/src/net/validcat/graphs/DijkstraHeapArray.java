@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.validcat.interfaces.HeapMin;
 import net.validcat.models.DijkstraGraph;
 import net.validcat.models.Edge;
 import net.validcat.models.Vertex;
+import net.validcat.structure.HeapMin;
 
 public class DijkstraHeapArray {
 	private static int[] distTo;

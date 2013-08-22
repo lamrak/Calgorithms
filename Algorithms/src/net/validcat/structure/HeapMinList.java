@@ -1,8 +1,10 @@
-package net.validcat.interfaces;
+package net.validcat.structure;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import net.validcat.interfaces.Heap;
 
 @SuppressWarnings("unchecked")
 public class HeapMinList<T extends Comparable<T>> implements Heap<T> {

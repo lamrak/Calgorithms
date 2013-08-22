@@ -1,6 +1,8 @@
-package net.validcat.interfaces;
+package net.validcat.structure;
 
 import java.util.Iterator;
+
+import net.validcat.interfaces.Heap;
 
 public class HeapMin<T extends Comparable<T>> implements Heap<T>, Cloneable, java.io.Serializable {
 	private static final long serialVersionUID = 4909408597188159120L;
@@ -9,7 +11,7 @@ public class HeapMin<T extends Comparable<T>> implements Heap<T>, Cloneable, jav
 	private int size = 0;
 	
 	public HeapMin() {
-		heap = new Object[1600];
+		heap = new Object[10];
 	}
 
 	public HeapMin(int capacity) {
@@ -18,8 +20,9 @@ public class HeapMin<T extends Comparable<T>> implements Heap<T>, Cloneable, jav
 	
 	@SuppressWarnings("unchecked")
 	public void insert(Comparable<T> t) {
-		rangeCheckForAdd(size++);
-		heap[size] = t;
+		if (size >= heap.length) resize(heap.length*2);
+		rangeCheckForAdd(size);
+		heap[size++] = t;
 		int tInd = size-1;
 		int pInd = (tInd % 2 == 0 && tInd != 0 ? tInd-1 : tInd)/2;
 		T p = (T) heap[pInd];
@@ -47,6 +50,9 @@ public class HeapMin<T extends Comparable<T>> implements Heap<T>, Cloneable, jav
 		T returnValue = (T) heap[pInd];
 		Comparable<T> p = (Comparable<T>) heap[size-1];
 		heap[--size] = null;
+		
+		if (size <= heap.length/4) resize(heap.length/2);
+		
 		if (size == 0) return returnValue;
 
 		heap[pInd] = p;
@@ -122,6 +128,13 @@ public class HeapMin<T extends Comparable<T>> implements Heap<T>, Cloneable, jav
 		position = 0;
 		return this;
 	}
+	
+	private void resize(int newLength) {
+		Object[] b = new Object[newLength];
+		for (int i = 0; i < size; i++) 
+			b[i] = heap[i];
+		heap = b;
+	}
 
 	private void rangeCheckForAdd(int index) {
 		if (index < 0 || index > this.size)
@@ -140,9 +153,10 @@ public class HeapMin<T extends Comparable<T>> implements Heap<T>, Cloneable, jav
 			heap.insert(a[i]);
 		}
 		// test comparator
-		for (Integer item : heap) {
-			System.out.println(item);
-		}
+//		for (Integer item : heap) {
+//			System.out.println(item);
+//		}
+		System.out.println("Output");
 		// test extract
 		for (int i = 0; i < a.length; i++) {
 			System.out.println(heap.extract());
