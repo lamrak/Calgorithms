@@ -3,3 +3,7 @@ Algorithms/bin/net/validcat/graphs/DijkstraHeapArray.class
 Algorithms/bin/net/validcat/other/MedianMaintenance.class
 Algorithms/bin/net/validcat/structure/HeapMin.class
 Algorithms/bin/net/validcat/structure/HeapMinList.class
+Algorithms/bin/net/validcat/models/SCCsGraph.class
+Algorithms/bin/net/validcat/structure/Heap.class
+Algorithms/bin/net/validcat/structure/HeapMax.class
+Algorithms/bin/net/validcat/structure/HeapMed.class

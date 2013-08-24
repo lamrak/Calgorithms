@@ -4,6 +4,14 @@ import java.io.IOException;
 
 import net.validcat.utils.Utils;
 
+/**
+ * Added a new data structure collection: HeapMid - always 
+ * return a median value from the input data. 
+ * Example: input data: 1,3,5; Return value 3. 
+ * Realization is based on the two heaps - HeapMin and HeapMax.
+ * @author Oleksii Dobrunov
+ *
+ */
 public class HeapMed<T extends Comparable<T>> implements Heap<T> {
 	private static final long serialVersionUID = -2780946692238382214L;
 	HeapMax<T> heapMax; //...1,2,5,6,10
@@ -66,24 +74,8 @@ public class HeapMed<T extends Comparable<T>> implements Heap<T> {
 			heapMed.insert(a[i]);
 			mediance += heapMed.extract();
 		}
-		System.out.println(mediance); // 46831213
+		System.out.println(mediance); // correct: 4683...
 		System.out.println(System.currentTimeMillis()- start);
-		//To compare realization without heap
-//		long medianceShort = 0;
-//		start = System.currentTimeMillis();
-//		ArrayList<Integer> med = new ArrayList<Integer>();
-//		for (int i = 0; i < a.length; i++) {
-//			med.add(a[i]);
-//			Integer[] arr = med.toArray(new Integer[0]);
-//			Arrays.sort(arr);
-//			if (arr.length % 2 == 0) {
-//				medianceShort += arr[(arr.length/2)-1];
-//			} else {
-//				medianceShort += arr[((arr.length+1)/2)-1];
-//			}
-//		}
-//		System.out.println(medianceShort);
-//		System.out.println(System.currentTimeMillis()- start);
 	}
 
 }
