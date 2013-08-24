@@ -1,14 +1,12 @@
-package net.validcat.other;
+package net.validcat.structure;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import net.validcat.structure.HeapMin;
-import net.validcat.utils.HeapMax;
 import net.validcat.utils.Utils;
 
-public class MedianMaintenance {
+public class HeapMed {
 
 	/**
 	 * @param args

@@ -3,17 +3,17 @@ package net.validcat.structure;
 import java.util.Iterator;
 import net.validcat.interfaces.Heap;
 
-public class HeapMin<T extends Comparable<T>> implements Heap<T> {
-	private static final long serialVersionUID = 4909408597188159120L;
+public class HeapMax<T extends Comparable<T>> implements Heap<T> {
+	private static final long serialVersionUID = -6904735977968832161L;
 	private transient Object[] heap;
 	private int position;
 	private int size = 0;
 	
-	public HeapMin() {
+	public HeapMax() {
 		heap = new Object[10];
 	}
 
-	public HeapMin(int capacity) {
+	public HeapMax(int capacity) {
 		heap = new Object[capacity];
 	}
 
@@ -31,7 +31,7 @@ public class HeapMin<T extends Comparable<T>> implements Heap<T> {
 		int pInd = (tInd % 2 == 0 && tInd != 0 ? tInd-1 : tInd)/2;
 		T p = (T) heap[pInd];
 		
-		while (t.compareTo(p) == -1) {
+		while (p.compareTo((T) t) == -1) {
 			heap[pInd] = t;
 			heap[tInd] = p;
 			tInd = pInd;
@@ -39,7 +39,7 @@ public class HeapMin<T extends Comparable<T>> implements Heap<T> {
 			p = (T) heap[pInd];
 		}
 	}
-
+	
 	/**
 	 * Extract a minimum value from heap. Value will be eliminated from this heap.
 	 * 
@@ -62,7 +62,7 @@ public class HeapMin<T extends Comparable<T>> implements Heap<T> {
 		int tInd = getTInd(pInd);
 
 		Comparable<T> t = (Comparable<T>) heap[tInd];
-		while (t.compareTo((T) p) == -1 && (2*pInd)+1 <= size-1) {
+		while (p.compareTo((T) t) == -1 && (2*pInd)+1 <= size-1) {
 			heap[pInd] = t;
 			heap[tInd] = p;
 			pInd = tInd;
@@ -76,7 +76,7 @@ public class HeapMin<T extends Comparable<T>> implements Heap<T> {
 	@SuppressWarnings("unchecked")
 	private int getTInd(int pInd){
 		return 2*pInd+1 > size-1 ? 0 : 2*(pInd+1) > size-1  
-				? 2*pInd + 1 : ((T) heap[(2*pInd)+1]).compareTo((T) heap[2*(pInd+1)]) != -1
+				? 2*pInd + 1 : ((T) heap[2*(pInd+1)]).compareTo((T) heap[(2*pInd)+1]) != -1 
 						? 2*(pInd+1) : 2*pInd+1;
 	}
 	
@@ -150,7 +150,7 @@ public class HeapMin<T extends Comparable<T>> implements Heap<T> {
 	
 	public static void main(String[] args) {
 		Integer[] a = {1,6,4,7,2,10,9,8,3,5};
-		HeapMin<Integer> heap = new HeapMin<Integer>();
+		HeapMax<Integer> heap = new HeapMax<Integer>();
 		// test insert
 		for (int i = 0; i < a.length; i++) {
 			heap.insert(a[i]);
@@ -164,7 +164,6 @@ public class HeapMin<T extends Comparable<T>> implements Heap<T> {
 		for (int i = 0; i < a.length; i++) {
 			System.out.println(heap.extract());
 		}
-		
 	}
 
 }
