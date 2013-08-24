@@ -117,7 +117,7 @@ public class SCCsGraph {
 	}
 
 	public static void main(String[] args) {
-		SCCsGraph g = build("D:\\SVN\\Git\\calgorithms\\Algorithms\\minGraph.txt", 10);
+		SCCsGraph g = build("minGraph.txt", 10);
 		printGraph(g);
 		SCCsGraph rG = g.reverseOrder();
 		printGraph(rG);

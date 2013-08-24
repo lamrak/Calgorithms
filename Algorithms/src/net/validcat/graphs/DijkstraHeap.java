@@ -3,12 +3,11 @@ package net.validcat.graphs;
 import java.io.IOException;
 import java.util.List;
 
-import net.validcat.interfaces.Heap;
 import net.validcat.models.DijkstraGraph;
 import net.validcat.models.Edge;
 import net.validcat.models.Vertex;
+import net.validcat.structure.Heap;
 import net.validcat.structure.HeapMin;
-import net.validcat.structure.HeapMinList;
 
 public class DijkstraHeap {
 	private static int[] distTo;

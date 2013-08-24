@@ -1,9 +1,8 @@
 package net.validcat.structure;
 
 import java.util.Iterator;
-import net.validcat.interfaces.Heap;
 
-public class HeapMax<T extends Comparable<T>> implements Heap<T> {
+public class HeapMax<T extends Comparable<T>> implements Heap<T>, Iterable<T>, Iterator<T> {
 	private static final long serialVersionUID = -6904735977968832161L;
 	private transient Object[] heap;
 	private int position;
@@ -18,7 +17,7 @@ public class HeapMax<T extends Comparable<T>> implements Heap<T> {
 	}
 
 	/**
-	 * Insert value in heap.
+	 * Insert value in the heap.
 	 *  
 	 * @see <code>extract()</code>
 	 */
@@ -39,7 +38,7 @@ public class HeapMax<T extends Comparable<T>> implements Heap<T> {
 			p = (T) heap[pInd];
 		}
 	}
-	
+
 	/**
 	 * Extract a minimum value from heap. Value will be eliminated from this heap.
 	 * 
@@ -110,11 +109,13 @@ public class HeapMax<T extends Comparable<T>> implements Heap<T> {
 		else return false;
 	}
 
+	@Override
 	public boolean hasNext() {
 		if (position >= size || heap[position] == null) return false;
 		else return true;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public T next() {
 		int i = position++;
