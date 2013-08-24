@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class Merge {
-	int inversion;
+	private static int inversion;
 	
-	public int[] sort(int[] input){
+	public static int[] sort(int[] input){
 		if (input.length <= 1) return input;
 		
 		int right[] = sort(Arrays.copyOfRange(input, input.length/2, input.length));
@@ -15,7 +15,7 @@ public class Merge {
 		return merge(new int[input.length], left, right);
 	}
 	
-	private int[] merge(int[] output, int left[], int right[]){
+	private static int[] merge(int[] output, int left[], int right[]){
 		for (int i = 0, j = 0, k = 0; k < output.length; k++) {
 			if (i == left.length) {
 				output[k] = right[j++];
@@ -35,15 +35,14 @@ public class Merge {
 		return output;
 	}
 	
-	public int getInversion() {
+	public static int getInversion() {
 		return inversion;
 	}
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
-		Merge ms = new Merge();
 		int[] a = {5, 3, 8, 9, 1, 7, 0, 2, 6, 4};
-		System.out.println(Arrays.toString(ms.sort(a)));
-		System.out.println(ms.getInversion());
+		System.out.println(Arrays.toString(Merge.sort(a)));
+		System.out.println(Merge.getInversion());
 	}
 
 	
