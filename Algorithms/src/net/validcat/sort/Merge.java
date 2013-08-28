@@ -8,7 +8,7 @@ public class Merge {
 	
 	public static int[] sort(int[] input){
 		if (input.length <= 1) return input;
-		
+		//TODO add sort-insertion algorith for small input arrays (less than 15 )
 		int right[] = sort(Arrays.copyOfRange(input, input.length/2, input.length));
 		int left[] = sort(Arrays.copyOfRange(input, 0, input.length/2));
 		

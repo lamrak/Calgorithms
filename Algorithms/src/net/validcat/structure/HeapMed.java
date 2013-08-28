@@ -12,7 +12,7 @@ import net.validcat.utils.Utils;
  * @author Oleksii Dobrunov
  *
  */
-public class HeapMed<T extends Comparable<T>> implements Heap<T> {
+public class HeapMed<T extends Comparable<T>> implements IBinaryHeap<T> {
 	private static final long serialVersionUID = -2780946692238382214L;
 	HeapMax<T> heapMax; //...1,2,5,6,10
 	HeapMin<T> heapMin; //11,14,15,16...
@@ -48,12 +48,10 @@ public class HeapMed<T extends Comparable<T>> implements Heap<T> {
 		return (heapMax.size() < index) ? heapMin.get() : heapMax.get();
 	}
 
-
 	@Override
 	public T get() {
 		throw new UnsupportedOperationException();
 	}
-
 
 	@Override
 	public int size() {

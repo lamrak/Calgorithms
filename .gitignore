@@ -7,3 +7,9 @@ Algorithms/bin/net/validcat/models/SCCsGraph.class
 Algorithms/bin/net/validcat/structure/Heap.class
 Algorithms/bin/net/validcat/structure/HeapMax.class
 Algorithms/bin/net/validcat/structure/HeapMed.class
+Algorithms/bin/net/validcat/sort/Merge.class
+Algorithms/bin/net/validcat/structure/AbstractHeap.class
+Algorithms/bin/net/validcat/structure/IBinaryHeap.class
+Algorithms/bin/net/validcat/utils/LoadingTest.class
+Algorithms/bin/net/validcat/utils/StdRandom.class
+Algorithms/bin/net/validcat/utils/Stopwatch.class

@@ -6,12 +6,12 @@ import java.util.List;
 import net.validcat.models.DijkstraGraph;
 import net.validcat.models.Edge;
 import net.validcat.models.Vertex;
-import net.validcat.structure.Heap;
+import net.validcat.structure.IBinaryHeap;
 import net.validcat.structure.HeapMin;
 
 public class DijkstraHeap {
 	private static int[] distTo;
-	private Heap<Edge> heap = new HeapMin<Edge>();
+	private IBinaryHeap<Edge> heap = new HeapMin<Edge>();
 	
 	public static void main(String[] args) throws IOException {
 		String path = "dijkstraData.txt";

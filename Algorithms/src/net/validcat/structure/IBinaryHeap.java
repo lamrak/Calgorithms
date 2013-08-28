@@ -1,6 +1,6 @@
 package net.validcat.structure;
 
-public interface Heap<T extends Comparable<T>> extends Cloneable, java.io.Serializable {
+public interface IBinaryHeap<T extends Comparable<T>> extends Cloneable {
 	
 	T extract();
 	T get();
