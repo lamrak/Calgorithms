@@ -1,11 +1,13 @@
 package net.validcat.structure;
 
+import java.util.Comparator;
 import java.util.Iterator;
 
 abstract class AbstractHeap<T extends Comparable<T>> implements IBinaryHeap<T>, Iterable<T>, Iterator<T> {
 	private transient Object[] heap;
 	private int position;
 	private int size = 0;
+	private Comparator<T> c;
 	
 	public AbstractHeap() {
 		heap = new Object[10];
@@ -41,10 +43,10 @@ abstract class AbstractHeap<T extends Comparable<T>> implements IBinaryHeap<T>, 
 	abstract boolean compare(Comparable<T> t, Comparable<T> p);
 
 	/**
-	 * Extract a minimum value from heap. Value will be eliminated from this heap.
+	 * Extract a min or max value from heap. Value will be eliminated from this heap.
 	 * 
 	 * If you want to get value without deleting, look at <code>get()</code>
-	 * @return minimum value from this heap or null if heap is empty
+	 * @return min or max value from this heap or null if heap is empty
 	 * @see <code>isEmpty()</code>, <code>get()</code>
 	 */
 	@SuppressWarnings("unchecked")
@@ -81,9 +83,9 @@ abstract class AbstractHeap<T extends Comparable<T>> implements IBinaryHeap<T>, 
 	}
 	
 	/**
-	 * Get a minimum value from this heap without deleting it. 
-	 * If you want to extract minimum value from the heap with eliminating, look at <code>extract()</code>
-	 * @return minimum value from this heap or null if heap is empty
+	 * Get a min or max value from this heap without deleting it. 
+	 * If you want to extract value from the heap with eliminating, look at <code>extract()</code>
+	 * @return min or max value from this heap or null if heap is empty
 	 * @see <code>extract()</code>, <code>isEmpty()</code>
 	 */
 	@SuppressWarnings("unchecked")
@@ -108,6 +110,14 @@ abstract class AbstractHeap<T extends Comparable<T>> implements IBinaryHeap<T>, 
 	public boolean isEmpty() {
 		if (size == 0) return true;
 		else return false;
+	}
+	
+	public void setComparator(Comparator<T> c) {
+		this.c = c;
+	}
+	
+	public Comparator<T> getComparator() {
+		return c;
 	}
 
 	@Override
@@ -134,6 +144,11 @@ abstract class AbstractHeap<T extends Comparable<T>> implements IBinaryHeap<T>, 
 		return this;
 	}
 
+	/**
+	 * Resize an array when capacity is not enough for insertions values.
+	 * Shrink if array's capacity is excess.  
+	 * @param newLength
+	 */
 	private void resize(int newLength) {
 		Object[] b = new Object[newLength];
 		for (int i = 0; i < size; i++) 
@@ -149,4 +164,6 @@ abstract class AbstractHeap<T extends Comparable<T>> implements IBinaryHeap<T>, 
 	private String outOfBoundsMsg(int index) {
 		return "Index: " + index + ", Size: " + this.size;
 	}
+	
+	//TODO Fixed capacity
 }

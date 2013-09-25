@@ -13,3 +13,7 @@ Algorithms/bin/net/validcat/structure/IBinaryHeap.class
 Algorithms/bin/net/validcat/utils/LoadingTest.class
 Algorithms/bin/net/validcat/utils/StdRandom.class
 Algorithms/bin/net/validcat/utils/Stopwatch.class
+Algorithms/bin/net/validcat/sort/Insertion.class
+Algorithms/bin/net/validcat/structure/BinaryTree$Node.class
+Algorithms/bin/net/validcat/structure/BinaryTree.class
+Algorithms/bin/net/validcat/structure/IBinaryTree.class

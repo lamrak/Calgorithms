@@ -14,6 +14,7 @@ public class HeapMax<T extends Comparable<T>> extends AbstractHeap<T> implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean compare(Comparable<T> t, Comparable<T> p) {
+		if (getComparator() != null) return (getComparator().compare((T) p, (T) t) < 0);
 		return p.compareTo((T) t) < 0 ? true : false; 
 	}
 	

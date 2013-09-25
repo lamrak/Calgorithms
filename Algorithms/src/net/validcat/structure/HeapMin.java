@@ -10,13 +10,14 @@ public class HeapMin<T extends Comparable<T>> extends AbstractHeap<T> implements
 	public HeapMin(int capacity) {
 		super(capacity);
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean compare(Comparable<T> t, Comparable<T> p) {
-		return t.compareTo((T) p) < 0 ? true : false; 
+		if (getComparator() != null) return (getComparator().compare((T) t, (T) p) < 0);
+		else return t.compareTo((T) p) < 0 ? true : false; 
 	}
-
+	
 	public static void main(String[] args) {
 		Integer[] a = {1,6,4,7,2,10,9,8,3,5};
 		HeapMin<Integer> heap = new HeapMin<Integer>();
